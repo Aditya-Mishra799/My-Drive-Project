@@ -6,16 +6,22 @@ dotenv.config();
 const { Pool } = pkg;
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl : {rejectUnauthorized: false}
-})
-
-// pool.on("connect", async (client) => {
-//   await client.query('SET search_path TO public');
-// });
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT),
+  ssl: {
+    rejectUnauthorized: false
+  },
+});
 
 pool.connect()
-.then(()=>console.log("[DB] - Connected to the database"))
-.catch(()=>console.error("[DB] - Error connecting to the database"));
+  .then(() => console.log("[DB] - Connected to the database"))
+  .catch((err) => {
+    console.error("[DB] - Connection error:");
+    console.error(err.message);
+    console.error(err.stack);
+  });
 
 export default pool;

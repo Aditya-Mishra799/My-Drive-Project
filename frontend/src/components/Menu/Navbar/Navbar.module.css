@@ -1,0 +1,75 @@
+.navBar{
+    width: 100%;
+    background-color: black;
+    padding: 0.6em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: relative;
+}
+
+.logoCnt{
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    font-size: large;
+}
+
+.navLinks{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.logoutBtn {
+    background-color: #dc2626;
+    color: white;
+    padding: 0.4em 1em;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+}
+
+.logoutBtn:hover {
+    background-color: #b91c1c;
+}
+
+.menuButtonWrapper {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .navLinks {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: black;
+        flex-direction: column;
+        padding: 1em;
+        gap: 1em;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 100;
+    }
+
+    .navLinks.open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menuButtonWrapper {
+        display: block;
+    }
+
+    .logoutBtn {
+        width: 100%;
+    }
+}
+

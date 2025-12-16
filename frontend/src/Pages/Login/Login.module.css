@@ -1,0 +1,31 @@
+.pageCnt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center;
+    height: 95vh;
+}
+
+.page{
+    background-color: rgb(233, 231, 234);
+    padding: 2em 3em;
+    border-radius: 5px;
+}
+.page h1{
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0.5em;
+}
+
+.page > form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+@media (max-width: 500px) {
+    .page{
+        font-size: 0.9rem;
+    }
+}

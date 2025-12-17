@@ -20,8 +20,6 @@ pool.connect()
   .then(() => console.log("[DB] - Connected to the database"))
   .catch((err) => {
     console.error("[DB] - Connection error:");
-    console.error(err.message);
-    console.error(err.stack);
   });
 
 export default pool;

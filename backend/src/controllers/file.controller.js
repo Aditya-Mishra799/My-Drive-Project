@@ -36,7 +36,6 @@ const uploadFile = async (req, res, next) => {
             data: fileRecord,
         });
     } catch (error) {
-        console.log(error)
         next(error);
     }
 };

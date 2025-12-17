@@ -29,10 +29,10 @@ const Login = () => {
           "Content-Type": "application/json"
         }
       });
+      const json = await response.json()
       if (!response.ok) {
         return toast.error(json.error.message || "Unable to login, please try again!")
       }
-      const json = await response.json()
       setUser(json?.data?.user)
       navigate("/")
       toast.success("Logged in successfully")

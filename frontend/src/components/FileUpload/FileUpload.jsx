@@ -116,6 +116,7 @@ const FileUpload = ({ onUploadSuccess }) => {
                 <label htmlFor="fileInput" className={styles.uploadLabel}>
                     <Upload size={32} />
                     <span>Click to select files</span>
+                    <span>Must not be be more than 1MB</span>
                     <input
                         id="fileInput"
                         type="file"

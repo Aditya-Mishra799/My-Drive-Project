@@ -1,0 +1,213 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+}
+
+.closeButton:hover {
+    color: #333;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+    flex: 1;
+    padding: 1em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    color: #666;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tab:hover {
+    background-color: #f9fafb;
+}
+
+.activeTab {
+    color: #1e1b1b;
+    border-bottom: 2px solid #1e1b1b;
+}
+
+.content {
+    padding: 1.5em;
+}
+
+.shareForm,
+.linkForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.list {
+    margin-top: 1.5em;
+}
+
+.list h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1em;
+    color: #333;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+    padding: 2em;
+}
+
+.shareItem,
+.linkItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 0.75em;
+}
+
+.shareName {
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.shareEmail {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0.25em 0 0 0;
+}
+
+.shareExpiry {
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0.25em 0 0 0;
+}
+
+.linkInfo {
+    flex: 1;
+}
+
+.linkToken {
+    word-break: break-all;
+    color: #333;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.linkActions {
+    display: flex;
+    gap: 0.5em;
+}
+
+.copyButton {
+    padding: 0.5em 1em;
+    background-color: #1e1b1b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.copyButton:hover {
+    background-color: #2d2a2a;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+}
+
+.deleteButton:hover {
+    color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+    .modalContent {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .header {
+        padding: 1em;
+    }
+
+    .header h2 {
+        font-size: 1.1rem;
+    }
+
+    .content {
+        padding: 1em;
+    }
+
+    .shareItem,
+    .linkItem {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75em;
+    }
+
+    .linkActions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

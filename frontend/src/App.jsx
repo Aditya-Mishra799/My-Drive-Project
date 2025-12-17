@@ -5,6 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/SignUp/SignUp';
+import SharedWithMe from './Pages/SharedWithMe/SharedWithMe';
+import ActivityLog from './Pages/ActivityLog/ActivityLog';
+import ShareLink from './Pages/ShareLink/ShareLink';
 import { Navbar } from './components/Menu/Navbar/Navbar';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 
@@ -16,6 +19,9 @@ function App() {
       <div className='page'>
         <Routes>
           <Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path='/shared' element={<PrivateRoute><SharedWithMe /></PrivateRoute>} />
+          <Route path='/activity' element={<PrivateRoute><ActivityLog /></PrivateRoute>} />
+          <Route path='/share/:token' element={<PrivateRoute><ShareLink /></PrivateRoute>} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
         </Routes>

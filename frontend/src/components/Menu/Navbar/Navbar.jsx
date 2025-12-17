@@ -27,8 +27,18 @@ export const Navbar = () => {
 
     const links = [
         {
-            label: "Home",
+            label: "My Files",
             link: "/",
+            visible: !!user,
+        },
+        {
+            label: "Shared",
+            link: "/shared",
+            visible: !!user,
+        },
+        {
+            label: "Activity",
+            link: "/activity",
             visible: !!user,
         },
         {

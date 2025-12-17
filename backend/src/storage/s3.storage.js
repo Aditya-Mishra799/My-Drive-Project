@@ -30,6 +30,7 @@ class S3Storage extends StorageInterface {
             await this.client.send(command);
             return key;
         } catch (error) {
+            console.log(error)
             throw new ApiError(500, "Failed to upload file to storage", "STORAGE_UPLOAD_ERROR", { originalError: error.message });
         }
     }

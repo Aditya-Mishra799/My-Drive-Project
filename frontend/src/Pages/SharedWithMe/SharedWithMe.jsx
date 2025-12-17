@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Share2, Trash2 } from 'lucide-react';
-import styles from './Home.module.css';
-import FileUpload from '../../components/FileUpload/FileUpload';
+import { Download } from 'lucide-react';
+import styles from './SharedWithMe.module.css';
 import Table from '../../components/Table/Table';
-import FileShare from '../../components/FileShare/FileShare';
 import getApiURL from '../../utils/getApiURl';
 import { toast } from 'react-toastify';
 
-const Home = () => {
+const SharedWithMe = () => {
   const [files, setFiles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
   const limit = 10;
 
-  const fetchFiles = async (page = 1) => {
+  const fetchSharedFiles = async (page = 1) => {
     setLoading(true);
     try {
       const offset = (page - 1) * limit;
-      const response = await fetch(getApiURL(`/api/files/my-files?limit=${limit}&offset=${offset}`), {
+      const response = await fetch(getApiURL(`/api/files/shared-with-me?limit=${limit}&offset=${offset}`), {
         credentials: 'include',
       });
       const json = await response.json();
@@ -28,23 +25,18 @@ const Home = () => {
         setTotalPages(Math.ceil(json.data.total / limit));
       }
     } catch (error) {
-      toast.error('Failed to fetch files');
+      toast.error('Failed to fetch shared files');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchFiles(currentPage);
+    fetchSharedFiles(currentPage);
   }, [currentPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-  };
-
-  const handleUploadSuccess = () => {
-    setCurrentPage(1);
-    fetchFiles(1);
   };
 
   const downloadFile = async (fileId, filename) => {
@@ -70,25 +62,6 @@ const Home = () => {
     }
   };
 
-  const deleteFile = async (fileId) => {
-    if (!window.confirm('Are you sure you want to delete this file?')) {
-      return;
-    }
-    try {
-      const response = await fetch(getApiURL(`/api/files/${fileId}`), {
-        method: 'DELETE',
-        credentials: 'include',
-      });
-      if (!response.ok) {
-        throw new Error('Delete failed');
-      }
-      toast.success('File deleted successfully');
-      fetchFiles(currentPage);
-    } catch (error) {
-      toast.error('Failed to delete file');
-    }
-  };
-
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -101,12 +74,17 @@ const Home = () => {
     {
       header: 'Filename',
       accessor: 'filename',
-      width: '40%',
+      width: '35%',
+    },
+    {
+      header: 'Owner',
+      accessor: 'owner_name',
+      width: '20%',
     },
     {
       header: 'Type',
       accessor: 'file_type',
-      width: '20%',
+      width: '15%',
     },
     {
       header: 'Size',
@@ -115,14 +93,8 @@ const Home = () => {
       width: '15%',
     },
     {
-      header: 'Uploaded',
-      accessor: 'created_at',
-      render: (row) => new Date(row.created_at).toLocaleDateString(),
-      width: '15%',
-    },
-    {
       header: 'Actions',
-      width: '10%',
+      width: '15%',
       render: (row) => (
         <div className={styles.actions}>
           <button
@@ -132,20 +104,6 @@ const Home = () => {
           >
             <Download size={18} />
           </button>
-          <button
-            onClick={() => setSelectedFile(row)}
-            className={styles.actionButton}
-            title="Share"
-          >
-            <Share2 size={18} />
-          </button>
-          <button
-            onClick={() => deleteFile(row.id)}
-            className={`${styles.actionButton} ${styles.deleteButton}`}
-            title="Delete"
-          >
-            <Trash2 size={18} />
-          </button>
         </div>
       ),
     },
@@ -153,27 +111,18 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <h1>My Files</h1>
-      <FileUpload onUploadSuccess={handleUploadSuccess} />
-      <div className={styles.filesSection}>
-        <h2>Your Files</h2>
-        <Table
-          columns={columns}
-          data={files}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-          loading={loading}
-        />
-      </div>
-      {selectedFile && (
-        <FileShare
-          file={selectedFile}
-          onClose={() => setSelectedFile(null)}
-        />
-      )}
+      <h1>Shared With Me</h1>
+      <p className={styles.description}>Files that other users have shared with you</p>
+      <Table
+        columns={columns}
+        data={files}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        loading={loading}
+      />
     </div>
   );
 };
 
-export default Home;
+export default SharedWithMe;

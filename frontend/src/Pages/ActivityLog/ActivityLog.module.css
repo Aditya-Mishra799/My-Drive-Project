@@ -1,0 +1,21 @@
+.container {
+    padding: 2em;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.container h1 {
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 2em;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1em;
+    }
+}

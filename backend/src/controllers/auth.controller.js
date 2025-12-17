@@ -22,12 +22,16 @@ const signup = async (req, res, next) => {
     }
 }
 
+const isProd = process.env.NODE_ENV === "production";
+
 const cookieOptions = {
-    httpOnly: true,
-    maxAge: settings.cookieExpiry.timeMS,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "none"
-}
+  httpOnly: true,
+  maxAge: settings.cookieExpiry.timeMS,
+  secure: isProd,          
+  sameSite: isProd ? "none" : "lax",
+  path: "/",         
+};
+
 const login = async (req, res, next) => {
     const { email, password } = req.body;
     try {

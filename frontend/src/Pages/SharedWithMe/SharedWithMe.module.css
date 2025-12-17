@@ -5,18 +5,13 @@
 }
 
 .container h1 {
-    margin-bottom: 1.5em;
+    margin-bottom: 0.5em;
     color: #333;
 }
 
-.filesSection {
-    margin-top: 2em;
-}
-
-.filesSection h2 {
-    margin-bottom: 1em;
-    color: #333;
-    font-size: 1.25rem;
+.description {
+    color: #666;
+    margin-bottom: 2em;
 }
 
 .actions {
@@ -37,16 +32,8 @@
     color: #1e1b1b;
 }
 
-.deleteButton:hover {
-    color: #dc2626;
-}
-
 @media (max-width: 768px) {
     .container {
         padding: 1em;
-    }
-
-    .actions {
-        flex-direction: column;
     }
 }

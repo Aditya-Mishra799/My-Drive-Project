@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    console.log(user)
     const navigate = useNavigate();
     const fetchUser = async () => {
         setLoading(true)

@@ -5,6 +5,8 @@ import styles from './FileUpload.module.css';
 import getApiURL from '../../utils/getApiURl';
 import { toast } from 'react-toastify';
 
+const MAX_FILE_SIZE = 1.2 * 1024 * 1024;
+
 const FileUpload = ({ onUploadSuccess }) => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [uploading, setUploading] = useState(false);
@@ -12,7 +14,16 @@ const FileUpload = ({ onUploadSuccess }) => {
 
     const handleFileSelect = (e) => {
         const files = Array.from(e.target.files);
-        setSelectedFiles((prev) => [...prev, ...files]);
+        const validFiles = files.filter(file => {
+            if (file.size > MAX_FILE_SIZE) {
+                toast.error(`${file.name} exceeds 1MB and was rejected`);
+                return false;
+            }
+            return true;
+        });
+
+        setSelectedFiles(prev => [...prev, ...validFiles]);
+        e.target.value = "";
     };
 
     const removeFile = (index) => {
@@ -104,7 +115,7 @@ const FileUpload = ({ onUploadSuccess }) => {
             <div className={styles.uploadBox}>
                 <label htmlFor="fileInput" className={styles.uploadLabel}>
                     <Upload size={32} />
-                    <span>Click to select files or drag and drop</span>
+                    <span>Click to select files</span>
                     <input
                         id="fileInput"
                         type="file"
